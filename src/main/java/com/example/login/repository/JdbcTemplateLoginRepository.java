@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.Optional;
 
 @Repository
 public class JdbcTemplateLoginRepository implements LoginRepository{
@@ -21,21 +22,27 @@ public class JdbcTemplateLoginRepository implements LoginRepository{
 
     /**
      * 일반 회원가입
-     * @param postUserReq
-     * @return
      */
     @Override
-    public Long signup(PostUserReq postUserReq) {
-        return null;
+    public Long createUser(PostUserReq postUserReq) {
+        String query = "insert into User (email, nickname, password)" +
+                                    "values (?,?,?)";
+        Object[] params = new Object[]{postUserReq.getEmail(), postUserReq.getNickname(), postUserReq.getPassword()};
+
+        this.jdbcTemplate.update(query, params);
+        return this.jdbcTemplate.queryForObject("select last_insert_id()", Long.class);
     }
 
     /**
      * 일반 로그인
-     * @param postLoginReq
-     * @return
      */
     @Override
-    public User login(PostLoginReq postLoginReq) {
-        return null;
+    public Optional<User> getInfoByEmail(PostLoginReq postLoginReq) {
+        String query = "select userIdx, email, nickname, password from User where email = ?";
+        String param = postLoginReq.getEmail();
+        return Optional.ofNullable(this.jdbcTemplate.queryForObject(query,
+                (rs, rowNum) -> new User(rs.getLong("userIdx"), rs.getString("email"),
+                        rs.getString("nickname"), rs.getString("password")),
+                param));
     }
 }

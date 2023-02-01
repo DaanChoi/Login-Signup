@@ -24,14 +24,12 @@ public class LoginController {
 
     /**
      * 일반 회원가입
-     * @param postUserReq
-     * @return
      */
     @PostMapping("signup")
     @ResponseBody
-    public BaseResponse<PostUserRes> signup(@RequestBody PostUserReq postUserReq) {
+    public BaseResponse<PostUserRes> createUser(@RequestBody PostUserReq postUserReq) {
         try {
-            PostUserRes postUserRes = loginService.signup(postUserReq);
+            PostUserRes postUserRes = loginService.createUser(postUserReq);
             return new BaseResponse<>(postUserRes, POST_SUCCESS);
         } catch (BaseException exception) {
             return new BaseResponse<>(exception.getStatus());
@@ -40,8 +38,6 @@ public class LoginController {
 
     /**
      * 일반 로그인
-     * @param postLoginReq
-     * @return
      */
     @PostMapping("login")
     @ResponseBody
@@ -50,6 +46,7 @@ public class LoginController {
             PostLoginRes postLoginRes = loginService.login(postLoginReq);
             return new BaseResponse<>(postLoginRes, POST_SUCCESS);
         } catch (BaseException exception) {
+            exception.printStackTrace();
             return new BaseResponse<>(exception.getStatus());
         }
     }

@@ -3,9 +3,10 @@ package com.example.login.repository;
 import com.example.login.model.PostLoginReq;
 import com.example.login.model.PostUserReq;
 import com.example.login.model.User;
-import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 public interface LoginRepository {
-    Long signup(PostUserReq postUserReq);
-    User login(PostLoginReq postLoginReq);
+    Long createUser(PostUserReq postUserReq);
+    Optional<User> getInfoByEmail(PostLoginReq postLoginReq);
 }
