@@ -21,7 +21,9 @@ public enum BaseResponseStatus {
     /**
      * 5XX : 서버 오류
      */
-    INTERNAL_SERVER_ERROR(false, 500, "Internal Server Error");
+    INTERNAL_SERVER_ERROR(false, 500, "Internal Server Error"),
+    FAIL_TO_ENCRYPTION(false, 520, "Encryption Fail"),
+    FAIL_TO_DECRYPTION(false, 520, "Decryption Fail");
 
     private final boolean isSuccess;
     private final int code;
