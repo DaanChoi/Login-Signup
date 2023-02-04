@@ -23,4 +23,4 @@
 
 
 ## 📘 더보기 및 관련문서
-[Wiki 보러가기](https://github.com/boostcampwm-2021/iOS08-WithBuddy/wiki)
+[Wiki 보러가기](https://github.com/DaanChoi/Login-Signup.wiki.git)
