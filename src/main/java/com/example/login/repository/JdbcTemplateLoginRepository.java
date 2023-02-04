@@ -45,4 +45,26 @@ public class JdbcTemplateLoginRepository implements LoginRepository{
                         rs.getString("nickname"), rs.getString("password")),
                 param));
     }
+
+    /**
+     * 이메일 중복 검사
+     */
+    @Override
+    public int checkEmail(String email) {
+        String query = "select exists(select email from User " +
+                                    "where status = 'A' and email = ?)";
+        String param = email;
+        return this.jdbcTemplate.queryForObject(query, int.class, param);
+    }
+
+    /**
+     * 닉네임 중복 검사
+     */
+    @Override
+    public int checkNickname(String nickname) {
+        String query = "select exists(select nickname from User " +
+                                    "where status = 'A' and nickname = ?)";
+        String param = nickname;
+        return this.jdbcTemplate.queryForObject(query, int.class, param);
+    }
 }

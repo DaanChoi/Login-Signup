@@ -27,9 +27,16 @@ public class LoginService {
         /**
          * 회원가입 로직
          * 1. (유효성 검사 후) 이메일, 비번, 닉네임 받음
-         * 2. (중복 검사 후) 비번은 암호화하여 넘김
+         * 2. (이메일, 닉네임 중복 검사 후) 비번은 암호화하여 넘김 ※비번도 중복 검사하나??
          * 3. db 저장 후 돌려받은 userIdx 를 RES
          */
+
+        // 이메일, 닉네임 중복 검사
+        boolean check = loginRepository.checkEmail(postUserReq.getEmail()) == 1 || loginRepository.checkNickname(postUserReq.getNickname()) == 1;
+        if(check){
+            throw new BaseException(DUPLICATION_ERROR);
+        }
+
         // 비번 암호화
         try {
             AES128 aes128 = new AES128(AES128_SECRET_KEY);

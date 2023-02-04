@@ -17,6 +17,8 @@ public enum BaseResponseStatus {
      * 4XX : 요청 오류
      */
     BAD_REQUEST(false, 400, "Bad Request"),
+    REGEX_ERROR(false, 460, "Regex Error"),
+    DUPLICATION_ERROR(false, 461, "Existing Value In DB Already"),
 
     /**
      * 5XX : 서버 오류

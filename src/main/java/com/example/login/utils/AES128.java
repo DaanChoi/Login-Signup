@@ -9,6 +9,10 @@ import java.security.Key;
 
 public class AES128 {
     private String ips;
+    // CBC 모드의 IV(Initial Vector)를 만들기 위함,
+    // IV란?
+    // 첫 블록은 이전 암호화 블록이 없기 때문에 IV 사용(16바이트, AES128),
+    // 제 2의 키 역활
     private Key keySpec;
 
     public AES128(String key) {
