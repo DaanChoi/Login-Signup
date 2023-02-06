@@ -1,5 +1,6 @@
 # Login-Signup
 > 일반 로그인 및 회원가입 기능 구현
+Jdbc Template을 사용하여 구현
 
 ## 📘 기능 로직
 > 일반 회원가입
